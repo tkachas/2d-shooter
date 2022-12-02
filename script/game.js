@@ -71,21 +71,25 @@ function moveWalls(leftOrRight, upOrDown) {
                 gun.style.width = gunWidth + 'px';
             }
     }
-    if (upOrDown == 'down' && !(groundHeight + sensitivity > 250) ) {
+    if (upOrDown == 'down' && groundHeight + sensitivity <= 225) {
         groundHeight += sensitivity;
         ceilingHeight -= sensitivity;
         ground.style.height = groundHeight + 'px';
-        rightWall.style.height = (500 - groundHeight) + 'px';
-        leftWall.style.height = (500 - groundHeight) + 'px';
-        ceiling.style.height = (500 - (groundHeight + 350)) + 'px';
+        if (parseInt(rightWallStyle.height) <= 500) {
+            rightWall.style.height = (500 - groundHeight) + 'px';
+            leftWall.style.height = (500 - groundHeight) + 'px';
+        }
+        ceiling.style.height = (500 - (groundHeight + 380)) + 'px';
 
     }
-    if (upOrDown == 'up' && groundHeight - sensitivity >= 10) {
+    if (upOrDown == 'up' && parseInt(ceilingStyle.height) + sensitivity <= 240) {
         groundHeight -= sensitivity;
         ground.style.height = groundHeight + 'px';
-        rightWall.style.height = (500 - groundHeight) + 'px';
-        leftWall.style.height = (500 - groundHeight) + 'px';
-        ceiling.style.height = (500 - (groundHeight + 350)) + 'px';
+        if (parseInt(rightWallStyle.height) <= 500) {
+            rightWall.style.height = (500 - groundHeight) + 'px';
+            leftWall.style.height = (500 - groundHeight) + 'px';
+        }
+        ceiling.style.height = (500 - (groundHeight + 380)) + 'px';
     }
 }
 

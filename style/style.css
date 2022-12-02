@@ -40,7 +40,8 @@ body {
   height:30px;
   width:30px;
   left: 385px;
-  top: 185px;
+  top: 242.5px;
+  /* top: 185px; */
   pointer-events: none;
 }
 .left-wall {
@@ -67,7 +68,7 @@ body {
 
 .ceiling {
     width: 800px;
-    height: 50px;
+    height: 20px;
     position: absolute;
     background-color: rgb(212, 170, 63);
 }
