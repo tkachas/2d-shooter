@@ -1,0 +1,66 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+.selectDisable {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.selectEnable { 
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -o-user-select: text;
+    user-select: text;
+}
+
+.field {
+    width: 800px;
+    height: 500px;
+    position: absolute;
+    background: aqua;
+    border: 5px solid blue;
+    cursor: none;
+
+}
+
+.gun {
+    width: 140px;
+    height: 150px;
+    position: absolute;
+    bottom: 0;
+    right: 0px;
+}
+.cursor {
+  position:absolute;
+  height:30px;
+  width:30px;
+  left: 385px;
+  top: 185px;
+  pointer-events: none;
+}
+.left-wall {
+    width: 100px;
+    height: 400px;
+    left: 0;
+    position: absolute;
+    background-color: rgb(97, 50, 24);
+}
+.right-wall {
+    width: 100px;
+    height: 400px;
+    position: absolute;
+    right: 0;
+    background-color: rgb(97, 50, 24);
+}
+.ground {
+    width: 800px;
+    height: 100px;
+    position: absolute;
+    background-color: rgb(212, 170, 63);
+    bottom:0;
+}
