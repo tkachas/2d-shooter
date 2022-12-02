@@ -1,7 +1,9 @@
 let field = document.querySelector('.field');
 let fieldStyle = getComputedStyle(field);
 
+
 let cursor = document.querySelector('.cursor');
+
 
 let gun = document.querySelector('.gun');
 let gunStyle = getComputedStyle(gun);
@@ -13,22 +15,28 @@ let leftWallStyle = getComputedStyle(leftWall);
 let leftWallWidth =  parseInt(leftWallStyle.width);
 
 
-
 let rightWall = document.querySelector('.right-wall');
 let rightWallStyle = getComputedStyle(rightWall);
 let rightWallWidth =  parseInt(rightWallStyle.width);
 
+let ground = document.querySelector('.ground');
+let groundStyle = getComputedStyle(ground);
+let groundHeight = parseInt(groundStyle.height);
+
+let ceiling = document.querySelector('.ceiling');
+let ceilingStyle = getComputedStyle(ceiling);
+let ceilingHeight = parseInt(ceilingStyle.height);
+
+
 const lastPoint = {x: null, y: null}
 
-let sensitivity = 2;
 
-let leftStop = 0;
-let rightStop = 0;
+let sensitivity = 3;
 
 
-window.addEventListener('mousemove', function(event) {
-    let cursorLeft = event.offsetX;
-    let cursorTop = event.offsetY;
+field.addEventListener('mousemove', function(event) {
+    // let cursorLeft = event.offsetX;
+    // let cursorTop = event.offsetY;
     const leftOrRight = (
         event.clientX > lastPoint.x ? 'right'
         : event.clientX < lastPoint.x ? 'left'
@@ -39,16 +47,14 @@ window.addEventListener('mousemove', function(event) {
         : event.clientY < lastPoint.y ? 'up'
         : 'none'
     );
-    if (cursorTop <= 500 + parseInt(fieldStyle.top) && cursorTop >= parseInt(fieldStyle.top) && cursorLeft >= parseInt(fieldStyle.left) && cursorLeft <= parseInt(fieldStyle.left) + 800) {
-        moveWalls(leftOrRight, upOrDown);
-    }
+    moveWalls(leftOrRight, upOrDown);
     lastPoint.x = event.clientX;
+    lastPoint.y = event.clientY;
 });
-
+// cursorTop <= 500 + parseInt(fieldStyle.top) && cursorTop >= parseInt(fieldStyle.top) && cursorLeft >= parseInt(fieldStyle.left) && cursorLeft <= parseInt(fieldStyle.left) + 800
 
 function moveWalls(leftOrRight, upOrDown) {
-    if (leftOrRight == 'left') {
-        if (parseInt(leftWallStyle.width) !== 380) {
+    if (leftOrRight == 'left' && !(parseInt(leftWallStyle.width) + sensitivity > 380)) {
             leftWallWidth += sensitivity;
             leftWall.style.width = leftWallWidth + 'px';
             rightWall.style.width = (800 - (leftWallWidth + 600)) + 'px';
@@ -56,9 +62,7 @@ function moveWalls(leftOrRight, upOrDown) {
                 gunWidth += 0.1;
                 gun.style.width = gunWidth + 'px';
             }
-        }
-    } else if (leftOrRight == 'right') {
-        if (parseInt(rightWallStyle.width) !== 380) {
+    } else if (leftOrRight == 'right' && !(parseInt(rightWallStyle.width) + sensitivity > 380)) {
             leftWallWidth -= sensitivity;
             leftWall.style.width = leftWallWidth + 'px';
             rightWall.style.width = (800 - (leftWallWidth + 600)) + 'px';
@@ -66,10 +70,22 @@ function moveWalls(leftOrRight, upOrDown) {
                 gunWidth -= 0.1;
                 gun.style.width = gunWidth + 'px';
             }
-        }
     }
-    if (upOrDown == 'up') {
+    if (upOrDown == 'down' && !(groundHeight + sensitivity > 250) ) {
+        groundHeight += sensitivity;
+        ceilingHeight -= sensitivity;
+        ground.style.height = groundHeight + 'px';
+        rightWall.style.height = (500 - groundHeight) + 'px';
+        leftWall.style.height = (500 - groundHeight) + 'px';
+        ceiling.style.height = (500 - (groundHeight + 350)) + 'px';
 
+    }
+    if (upOrDown == 'up' && groundHeight - sensitivity >= 10) {
+        groundHeight -= sensitivity;
+        ground.style.height = groundHeight + 'px';
+        rightWall.style.height = (500 - groundHeight) + 'px';
+        leftWall.style.height = (500 - groundHeight) + 'px';
+        ceiling.style.height = (500 - (groundHeight + 350)) + 'px';
     }
 }
 
