@@ -41,12 +41,15 @@ body {
     height: 5px;
     position: absolute;
     background-color: red;
-    top: 355px;
-    left: 670px;
+    /* top: 355px;
+    left: 670px; */
+    top: 255px;
+    left: 398px;
+    display: none;
 }
 
 .bullet.shot {
-    animation: shot 0.2s;
+    animation: shot 0.1s;
     display: block;
 }
 
@@ -55,8 +58,10 @@ body {
         
     }
     100% {
-        top: 255px;
-        left: 398px;
+        /* top: 255px;
+        left: 398px; */
+        top: 355px;
+        left: 670px;
     }
 }
 
@@ -97,3 +102,19 @@ body {
     position: absolute;
     background-color: rgb(212, 170, 63);
 }
+.object {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 50%;
+    top: 100px;
+    left: 250px;
+    animation: fly 5s infinite;
+}
+.object.killed {
+    background-color: red;
+}
+
+

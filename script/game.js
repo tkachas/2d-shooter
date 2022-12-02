@@ -28,6 +28,12 @@ let ceilingStyle = getComputedStyle(ceiling);
 let ceilingHeight = parseInt(ceilingStyle.height);
 
 let bullet = document.querySelector('.bullet');
+let bulletStyle = getComputedStyle(bullet);
+
+let object = document.querySelector('.object');
+let objectStyle = getComputedStyle(object);
+let objectTop = parseInt(objectStyle.top);
+let objectLeft = parseInt(objectStyle.left);
 
 
 const lastPoint = {x: null, y: null}
@@ -37,9 +43,20 @@ let sensitivity = 3;
 
 field.addEventListener('click', ()=>{
     bullet.classList.add('shot');
+    console.log(bulletStyle.top);
+    if (parseInt(bulletStyle.top) == 255 && parseInt(bulletStyle.left) == 398) {
+        if (parseInt(bulletStyle.top) >= objectTop && parseInt(bulletStyle.top) <= objectTop + parseInt(objectStyle.height)) {
+            if (parseInt(bulletStyle.left) >= objectLeft && parseInt(bulletStyle.left) <= objectLeft + parseInt(objectStyle.width)) {
+                object.style.backgroundColor = 'red';
+                setTimeout(()=>{
+                    object.style.backgroundColor = 'white';
+                }, 1000);
+            }
+        }
+    }
     setTimeout(()=>{
         bullet.classList.remove('shot');
-    }, 300);
+    }, 200);
 });
 
 
@@ -71,6 +88,8 @@ function moveWalls(leftOrRight, upOrDown) {
                 gunWidth += 0.1;
                 gun.style.width = gunWidth + 'px';
             }
+            objectLeft += sensitivity;
+            object.style.left = objectLeft + 'px';
     } else if (leftOrRight == 'right' && !(parseInt(rightWallStyle.width) + sensitivity > 380)) {
             leftWallWidth -= sensitivity;
             leftWall.style.width = leftWallWidth + 'px';
@@ -79,6 +98,8 @@ function moveWalls(leftOrRight, upOrDown) {
                 gunWidth -= 0.1;
                 gun.style.width = gunWidth + 'px';
             }
+            objectLeft -= sensitivity;
+            object.style.left = objectLeft + 'px';
     }
     if (upOrDown == 'down' && groundHeight + sensitivity <= 225) {
         groundHeight += sensitivity;
@@ -89,7 +110,8 @@ function moveWalls(leftOrRight, upOrDown) {
             leftWall.style.height = (500 - groundHeight) + 'px';
         }
         ceiling.style.height = (500 - (groundHeight + 380)) + 'px';
-
+            objectTop -= sensitivity;
+            object.style.top = objectTop + 'px';
     }
     if (upOrDown == 'up' && parseInt(ceilingStyle.height) + sensitivity <= 240) {
         groundHeight -= sensitivity;
@@ -99,6 +121,7 @@ function moveWalls(leftOrRight, upOrDown) {
             leftWall.style.height = (500 - groundHeight) + 'px';
         }
         ceiling.style.height = (500 - (groundHeight + 380)) + 'px';
+        objectTop += sensitivity;
+        object.style.top = objectTop + 'px';
     }
 }
-
