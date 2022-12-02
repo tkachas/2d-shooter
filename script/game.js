@@ -27,11 +27,20 @@ let ceiling = document.querySelector('.ceiling');
 let ceilingStyle = getComputedStyle(ceiling);
 let ceilingHeight = parseInt(ceilingStyle.height);
 
+let bullet = document.querySelector('.bullet');
+
 
 const lastPoint = {x: null, y: null}
 
 
 let sensitivity = 3;
+
+field.addEventListener('click', ()=>{
+    bullet.classList.add('shot');
+    setTimeout(()=>{
+        bullet.classList.remove('shot');
+    }, 300);
+});
 
 
 field.addEventListener('mousemove', function(event) {

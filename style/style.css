@@ -35,6 +35,31 @@ body {
     bottom: 0;
     right: 0px;
 }
+
+.bullet {
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    background-color: red;
+    top: 355px;
+    left: 670px;
+}
+
+.bullet.shot {
+    animation: shot 0.2s;
+    display: block;
+}
+
+@keyframes shot {
+    0% {
+        
+    }
+    100% {
+        top: 255px;
+        left: 398px;
+    }
+}
+
 .cursor {
   position:absolute;
   height:30px;
